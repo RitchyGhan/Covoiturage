@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="BackOfficeBundle\Entity\Covoiturage" table="covoiturage">
+    <indexes>
+      <index name="covoiturage_utilisateur_FK" columns="id_utilisateur"/>
+      <index name="covoiturage_co20_FK" columns="id_co2"/>
+      <index name="covoiturage_type_covoit1_FK" columns="id_type_covoit"/>
+      <index name="covoiturage_trajet2_FK" columns="id_trajet"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="created" type="datetime" column="created" nullable="false"/>
+    <field name="updated" type="datetime" column="updated" nullable="false"/>
+    <many-to-one field="idCo2" target-entity="Co2" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_co2" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTrajet" target-entity="Trajet" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_trajet" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTypeCovoit" target-entity="TypeCovoit" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_type_covoit" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
