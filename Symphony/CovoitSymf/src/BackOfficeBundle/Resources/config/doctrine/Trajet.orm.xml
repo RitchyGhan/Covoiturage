@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="BackOfficeBundle\Entity\Trajet" table="trajet">
+    <indexes>
+      <index name="trajet_ville_FK" columns="id_ville"/>
+      <index name="trajet_ville0_FK" columns="id_ville_ville_arrivee"/>
+      <index name="trajet_possede1_FK" columns="id_possede"/>
+      <index name="trajet_type_trajet2_FK" columns="id_type_trajet"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateDepart" type="date" column="date_depart" nullable="false"/>
+    <field name="heureDepart" type="time" column="heure_depart" nullable="false"/>
+    <field name="nbPlace" type="integer" column="nb_place" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="duree" type="float" column="duree" precision="10" scale="0" nullable="true"/>
+    <field name="commentaire" type="text" column="commentaire" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nbKm" type="float" column="nb_km" precision="10" scale="0" nullable="false"/>
+    <many-to-one field="idPossede" target-entity="Possede" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_possede" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTypeTrajet" target-entity="TypeTrajet" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_type_trajet" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idVilleVilleArrivee" target-entity="Ville" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_ville_ville_arrivee" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idVille" target-entity="Ville" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_ville" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
