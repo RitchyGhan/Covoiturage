@@ -1,0 +1,33 @@
+<?php
+
+namespace BackOfficeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Marque
+ *
+ * @ORM\Table(name="marque")
+ * @ORM\Entity
+ */
+class Marque
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marque", type="string", length=50, nullable=false)
+     */
+    private $marque;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+
