@@ -49,5 +49,86 @@ class Voiture
     private $idTypeVehicule;
 
 
-}
 
+    /**
+     * Set modele
+     *
+     * @param string $modele
+     *
+     * @return Voiture
+     */
+    public function setModele($modele)
+    {
+        $this->modele = $modele;
+
+        return $this;
+    }
+
+    /**
+     * Get modele
+     *
+     * @return string
+     */
+    public function getModele()
+    {
+        return $this->modele;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idMarque
+     *
+     * @param \BackOfficeBundle\Entity\Marque $idMarque
+     *
+     * @return Voiture
+     */
+    public function setIdMarque(\BackOfficeBundle\Entity\Marque $idMarque = null)
+    {
+        $this->idMarque = $idMarque;
+
+        return $this;
+    }
+
+    /**
+     * Get idMarque
+     *
+     * @return \BackOfficeBundle\Entity\Marque
+     */
+    public function getIdMarque()
+    {
+        return $this->idMarque;
+    }
+
+    /**
+     * Set idTypeVehicule
+     *
+     * @param \BackOfficeBundle\Entity\TypeVehicule $idTypeVehicule
+     *
+     * @return Voiture
+     */
+    public function setIdTypeVehicule(\BackOfficeBundle\Entity\TypeVehicule $idTypeVehicule = null)
+    {
+        $this->idTypeVehicule = $idTypeVehicule;
+
+        return $this;
+    }
+
+    /**
+     * Get idTypeVehicule
+     *
+     * @return \BackOfficeBundle\Entity\TypeVehicule
+     */
+    public function getIdTypeVehicule()
+    {
+        return $this->idTypeVehicule;
+    }
+}

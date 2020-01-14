@@ -107,20 +107,10 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // api_homepage
-        if ('' === $trimmedPathinfo) {
-            $ret = array (  '_controller' => 'ApiBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_homepage',);
-            if ('/' === substr($pathinfo, -1)) {
-                // no-op
-            } elseif ('GET' !== $canonicalMethod) {
-                goto not_api_homepage;
-            } else {
-                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'api_homepage'));
-            }
-
-            return $ret;
+        // api_categorie_all
+        if ('/api/categorie' === $pathinfo) {
+            return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCategorieAction',  '_route' => 'api_categorie_all',);
         }
-        not_api_homepage:
 
         // back_office_homepage
         if ('' === $trimmedPathinfo) {
