@@ -1,0 +1,108 @@
+<?php
+
+namespace BackOfficeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Trajet
+ *
+ * @ORM\Table(name="trajet", indexes={@ORM\Index(name="trajet_ville_FK", columns={"id_ville"}), @ORM\Index(name="trajet_ville0_FK", columns={"id_ville_ville_arrivee"}), @ORM\Index(name="trajet_possede1_FK", columns={"id_possede"}), @ORM\Index(name="trajet_type_trajet2_FK", columns={"id_type_trajet"})})
+ * @ORM\Entity
+ */
+class Trajet
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_depart", type="date", nullable=false)
+     */
+    private $dateDepart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="heure_depart", type="time", nullable=false)
+     */
+    private $heureDepart;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_place", type="integer", nullable=false)
+     */
+    private $nbPlace;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="duree", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $duree;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="text", length=65535, nullable=true)
+     */
+    private $commentaire;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="nb_km", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $nbKm;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \BackOfficeBundle\Entity\Possede
+     *
+     * @ORM\ManyToOne(targetEntity="BackOfficeBundle\Entity\Possede")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_possede", referencedColumnName="id")
+     * })
+     */
+    private $idPossede;
+
+    /**
+     * @var \BackOfficeBundle\Entity\TypeTrajet
+     *
+     * @ORM\ManyToOne(targetEntity="BackOfficeBundle\Entity\TypeTrajet")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_type_trajet", referencedColumnName="id")
+     * })
+     */
+    private $idTypeTrajet;
+
+    /**
+     * @var \BackOfficeBundle\Entity\Ville
+     *
+     * @ORM\ManyToOne(targetEntity="BackOfficeBundle\Entity\Ville")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_ville_ville_arrivee", referencedColumnName="id")
+     * })
+     */
+    private $idVilleVilleArrivee;
+
+    /**
+     * @var \BackOfficeBundle\Entity\Ville
+     *
+     * @ORM\ManyToOne(targetEntity="BackOfficeBundle\Entity\Ville")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_ville", referencedColumnName="id")
+     * })
+     */
+    private $idVille;
+
+
+}
+
