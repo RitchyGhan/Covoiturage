@@ -272,7 +272,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        if (0 === strpos($pathinfo, '/marque')) {
+        elseif (0 === strpos($pathinfo, '/marque')) {
             // marque_index
             if ('/marque' === $trimmedPathinfo) {
                 $ret = array (  '_controller' => 'BackOfficeBundle\\Controller\\MarqueController::indexAction',  '_route' => 'marque_index',);
