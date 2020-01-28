@@ -94,4 +94,9 @@ class Co2
     {
         return $this->id;
     }
+    
+    public function __toString()
+    {
+        return strval($this->valCo2);
+    }
 }
