@@ -1,3 +1,95 @@
-api_homepage:
-    path:     /
-    defaults: { _controller: ApiBundle:Default:index }
+api_categorie_all:
+    path:     /categorie
+    defaults: { _controller: ApiBundle:GetApi:GetAllCategorie }
+
+api_categorie_one:
+    path:     /categorie/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneCategorie }
+
+api_co2_all:
+    path:     /co2
+    defaults: { _controller: ApiBundle:GetApi:GetAllCo2 }
+
+api_co2_one:
+    path:     /co2/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneCo2 }
+
+api_marque_all:
+    path:     /marque
+    defaults: { _controller: ApiBundle:GetApi:GetAllMarque }
+
+api_marque_one:
+    path:     /marque/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneMarque }
+
+api_typeCovoit_all:
+    path:     /type_covoit
+    defaults: { _controller: ApiBundle:GetApi:GetAllTypeCovoit }
+
+api_typeCovoit_one:
+    path:     /type_covoit/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneTypeCovoit }
+
+api_typeTrajet_all:
+    path:     /type_trajet
+    defaults: { _controller: ApiBundle:GetApi:GetAllTypeTrajet }
+
+api_typeTrajet_one:
+    path:     /type_trajet/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneTypeTrajet }
+
+api_typeVehicule_all:
+    path:     /type_vehicule
+    defaults: { _controller: ApiBundle:GetApi:GetAllTypeVehicule }
+
+api_typeVehicule_one:
+    path:     /type_vehicule/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneTypeVehicule }
+
+api_ville_all:
+    path:     /ville
+    defaults: { _controller: ApiBundle:GetApi:GetAllVille }
+
+api_ville_one:
+    path:     /ville/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneVille }
+
+api_voiture_all:
+    path:     /voiture
+    defaults: { _controller: ApiBundle:GetApi:GetAllVoiture }
+
+api_voiture_one:
+    path:     /voiture/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneVoiture }
+
+api_utilisateur_all:
+    path:     /utilisateur
+    defaults: { _controller: ApiBundle:GetApi:GetAllUtilisateur }
+
+api_utilisateur_one:
+    path:     /utilisateur/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneUtilisateur }
+
+api_possede_all:
+    path:     /possede
+    defaults: { _controller: ApiBundle:GetApi:GetAllPossede }
+
+api_possede_one:
+    path:     /possede/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOnePossede }
+
+api_trajet_all:
+    path:     /trajet
+    defaults: { _controller: ApiBundle:GetApi:GetAllTrajet }
+
+api_trajet_one:
+    path:     /trajet/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneTrajet }
+
+api_covoiturage_all:
+    path:     /covoiturage
+    defaults: { _controller: ApiBundle:GetApi:GetAllCovoiturage }
+
+api_covoiturage_one:
+    path:     /covoiturage/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetOneCovoiturage }

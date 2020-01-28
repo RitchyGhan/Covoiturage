@@ -36,5 +36,62 @@ class Co2
     private $id;
 
 
-}
 
+    /**
+     * Set valCo2
+     *
+     * @param float $valCo2
+     *
+     * @return Co2
+     */
+    public function setValCo2($valCo2)
+    {
+        $this->valCo2 = $valCo2;
+
+        return $this;
+    }
+
+    /**
+     * Get valCo2
+     *
+     * @return float
+     */
+    public function getValCo2()
+    {
+        return $this->valCo2;
+    }
+
+    /**
+     * Set actif
+     *
+     * @param boolean $actif
+     *
+     * @return Co2
+     */
+    public function setActif($actif)
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    /**
+     * Get actif
+     *
+     * @return boolean
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

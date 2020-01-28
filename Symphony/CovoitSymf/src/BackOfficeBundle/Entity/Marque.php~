@@ -29,5 +29,38 @@ class Marque
     private $id;
 
 
-}
 
+    /**
+     * Set marque
+     *
+     * @param string $marque
+     *
+     * @return Marque
+     */
+    public function setMarque($marque)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return string
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

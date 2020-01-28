@@ -107,20 +107,170 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // api_homepage
-        if ('' === $trimmedPathinfo) {
-            $ret = array (  '_controller' => 'ApiBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_homepage',);
-            if ('/' === substr($pathinfo, -1)) {
-                // no-op
-            } elseif ('GET' !== $canonicalMethod) {
-                goto not_api_homepage;
-            } else {
-                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'api_homepage'));
+        elseif (0 === strpos($pathinfo, '/api')) {
+            if (0 === strpos($pathinfo, '/api/c')) {
+                if (0 === strpos($pathinfo, '/api/categorie')) {
+                    // api_categorie_all
+                    if ('/api/categorie' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCategorieAction',  '_route' => 'api_categorie_all',);
+                    }
+
+                    // api_categorie_one
+                    if (preg_match('#^/api/categorie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_categorie_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCategorieAction',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/co2')) {
+                    // api_co2_all
+                    if ('/api/co2' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCo2Action',  '_route' => 'api_co2_all',);
+                    }
+
+                    // api_co2_one
+                    if (preg_match('#^/api/co2/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_co2_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCo2Action',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/covoiturage')) {
+                    // api_covoiturage_all
+                    if ('/api/covoiturage' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCovoiturageAction',  '_route' => 'api_covoiturage_all',);
+                    }
+
+                    // api_covoiturage_one
+                    if (preg_match('#^/api/covoiturage/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_covoiturage_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCovoiturageAction',));
+                    }
+
+                }
+
             }
 
-            return $ret;
+            elseif (0 === strpos($pathinfo, '/api/marque')) {
+                // api_marque_all
+                if ('/api/marque' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllMarqueAction',  '_route' => 'api_marque_all',);
+                }
+
+                // api_marque_one
+                if (preg_match('#^/api/marque/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_marque_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneMarqueAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/type_')) {
+                if (0 === strpos($pathinfo, '/api/type_covoit')) {
+                    // api_typeCovoit_all
+                    if ('/api/type_covoit' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeCovoitAction',  '_route' => 'api_typeCovoit_all',);
+                    }
+
+                    // api_typeCovoit_one
+                    if (preg_match('#^/api/type_covoit/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeCovoit_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeCovoitAction',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/type_trajet')) {
+                    // api_typeTrajet_all
+                    if ('/api/type_trajet' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeTrajetAction',  '_route' => 'api_typeTrajet_all',);
+                    }
+
+                    // api_typeTrajet_one
+                    if (preg_match('#^/api/type_trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeTrajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeTrajetAction',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/type_vehicule')) {
+                    // api_typeVehicule_all
+                    if ('/api/type_vehicule' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeVehiculeAction',  '_route' => 'api_typeVehicule_all',);
+                    }
+
+                    // api_typeVehicule_one
+                    if (preg_match('#^/api/type_vehicule/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeVehicule_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeVehiculeAction',));
+                    }
+
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/trajet')) {
+                // api_trajet_all
+                if ('/api/trajet' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTrajetAction',  '_route' => 'api_trajet_all',);
+                }
+
+                // api_trajet_one
+                if (preg_match('#^/api/trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_trajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTrajetAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/ville')) {
+                // api_ville_all
+                if ('/api/ville' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllVilleAction',  '_route' => 'api_ville_all',);
+                }
+
+                // api_ville_one
+                if (preg_match('#^/api/ville/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_ville_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneVilleAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/voiture')) {
+                // api_voiture_all
+                if ('/api/voiture' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllVoitureAction',  '_route' => 'api_voiture_all',);
+                }
+
+                // api_voiture_one
+                if (preg_match('#^/api/voiture/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_voiture_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneVoitureAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/utilisateur')) {
+                // api_utilisateur_all
+                if ('/api/utilisateur' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllUtilisateurAction',  '_route' => 'api_utilisateur_all',);
+                }
+
+                // api_utilisateur_one
+                if (preg_match('#^/api/utilisateur/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_utilisateur_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneUtilisateurAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/possede')) {
+                // api_possede_all
+                if ('/api/possede' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllPossedeAction',  '_route' => 'api_possede_all',);
+                }
+
+                // api_possede_one
+                if (preg_match('#^/api/possede/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_possede_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOnePossedeAction',));
+                }
+
+            }
+
         }
-        not_api_homepage:
 
         // back_office_homepage
         if ('' === $trimmedPathinfo) {
