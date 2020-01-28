@@ -3363,8 +3363,17 @@
 <<<<<<< HEAD
         <argument key="C:\xampp\htdocs\Project\Covoiturage\Symphony\CovoitSymf\src\BackOfficeBundle\Resources\config\doctrine">BackOfficeBundle\Entity</argument>
 =======
+<<<<<<< HEAD
         <argument key="/home/ritchyghan/git/Covoiturage/Symphony/CovoitSymf/src/BackOfficeBundle/Resources/config/doctrine">BackOfficeBundle\Entity</argument>
 >>>>>>> 57d9f072db2ccb071e057c39986e92c978ee75d6
+=======
+<<<<<<< HEAD
+        <argument key="C:\xampp\htdocs\Project\Covoiturage\Symphony\CovoitSymf\src\BackOfficeBundle\Resources\config\doctrine">BackOfficeBundle\Entity</argument>
+=======
+        <argument key="/home/ritchyghan/git/Covoiturage/Symphony/CovoitSymf/src/BackOfficeBundle/Resources/config/doctrine">BackOfficeBundle\Entity</argument>
+>>>>>>> 57d9f072db2ccb071e057c39986e92c978ee75d6
+>>>>>>> 5132ea3f27a6a5eaedcf3342ae6227b50f2a0703
+>>>>>>> 9604e2ac4a73c6ecdb655c8d2b1a583abea5ff59
       </argument>
       <call method="setGlobalBasename">
         <argument>mapping</argument>

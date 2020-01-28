@@ -354,4 +354,9 @@ class Trajet
     {
         return $this->idVille;
     }
+    
+    public function __toString()
+    {
+        return strval($this->id);
+    }
 }

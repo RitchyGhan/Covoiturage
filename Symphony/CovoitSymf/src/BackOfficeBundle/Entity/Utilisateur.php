@@ -286,4 +286,9 @@ class Utilisateur
     {
         return $this->idVille;
     }
+    
+    public function __toString()
+    {
+        return $this->mail;
+    }
 }

@@ -63,4 +63,9 @@ class Marque
     {
         return $this->id;
     }
+    
+    public function __toString()
+    {
+        return $this->marque;
+    }
 }
