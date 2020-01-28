@@ -59,6 +59,13 @@
     "config": {
         "sort-packages": true
     },
+    "repositories": [
+    {
+        "type": "path",
+        "url": "src/BackOfficeBundle/Repository"
+                                            
+    }        
+    ],
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
