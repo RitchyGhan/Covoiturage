@@ -162,4 +162,9 @@ class Possede
     {
         return $this->idVoiture;
     }
+    
+    public function __toString()
+    {
+        return $this->immatriculation;
+    }
 }
