@@ -1,1 +1,26 @@
-<p>recherche-trajet works!</p>
+<div id='trajetComp'>
+    <table>
+        <tr>
+            <th>Date Depart</th>
+            <th>heure Depart</th>
+            <th>Ville Depart</th>
+            <th>Ville Arrivee</th>
+            <th>Duree</th>
+            <th>Km</th>
+            <th>Type</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let trajet of valueRetour">
+            <td>{{trajet.dateDepart.date | date:'yyyy-MM-dd'}}</td>
+            <td>{{trajet.heureDepart.date | date:'shortTime'}}</td>
+            <td>{{trajet.ville_depart_trajet.ville}}</td>
+            <td>{{trajet.ville_arrivee_trajet.ville}}</td>
+            <td>{{trajet.duree}} h</td>
+            <td>{{trajet.nbKm}}</td>
+            <td>{{trajet.type_trajet_trajet.typeTrajet}}</td>
+            <td><button [routerLink]="['/trajet', trajet.id]" routerLinkActive="active">info</button></td>
+        </tr>
+
+    </table>
+    
+</div>
