@@ -1,1 +1,63 @@
-<p>cree-trajet works!</p>
+<h2>Formulaire trajet</h2>
+<form (ngSubmit)="register()" [formGroup]="userForm">
+    <div>
+        <label>ville depart </label>
+        <select formControlName="id_ville">
+                <option [ngValue]="null" disabled>choix ville</option>
+                <option *ngFor="let value of ville" [ngValue]="value.id">
+                    {{ value.ville }}
+                </option>
+        </select> 
+    </div>
+    <div>
+        <label>ville arrivee </label>
+        <select formControlName="id_ville_ville_arrivee">
+                <option [ngValue]="null" disabled>choix ville</option>
+                <option *ngFor="let value of ville" [ngValue]="value.id">
+                    {{ value.ville }}
+                </option>
+        </select>
+
+    </div>
+    <div>
+        <label>date depart </label><input type="date" formControlName="date_depart">
+    </div>
+    <div>
+        <label>heure depart </label><input type="time" formControlName="heure_depart">
+    </div>
+    <div>
+        <label>nombre km </label><input type="number" formControlName="nb_km">
+    </div>
+    <div>
+        <label>duree </label><input type="number" formControlName="duree">
+    </div>
+    <div>
+        <label>type trajet </label>
+        <select formControlName="id_type_trajet">
+                <option [ngValue]="null" disabled>type trajet</option>
+                <option *ngFor="let value of type_trajet" [ngValue]="value.id">
+                    {{ value.typeTrajet }}
+                </option>
+        </select>
+    </div>
+    <div>
+        <label>nombre de place </label><input type="number" formControlName="nb_place">
+    </div>
+    <div>
+        <label>vehicule </label>
+        <select formControlName="id_possede">
+                <option [ngValue]="null" disabled>immatriculation</option>
+                <option *ngFor="let value of possede" [ngValue]="value.id">
+                    {{ value.immatriculation }}
+                </option>
+        </select>
+    </div>
+    <div>
+        <label>Commentaire</label><input formControlName="commentaire">
+    </div>
+
+    <button type="submit" [disabled]="userForm.invalid">cree trajet</button>
+</form>
+
+{{userForm.value['heure_depart']}}
+<!-- date_depart / heure_depart / nb_place / duree / commentaire /nb_km / id_ville/ id_ville_ville_arrivee / id_possede / id_type_trajet-->

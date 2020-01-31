@@ -20,7 +20,8 @@ class CovoiturageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackOfficeBundle\Entity\Covoiturage'
+            'data_class' => 'BackOfficeBundle\Entity\Covoiturage',
+            'csrf_protection' => false
         ));
     }
 
