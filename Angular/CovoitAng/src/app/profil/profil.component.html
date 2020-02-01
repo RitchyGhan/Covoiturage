@@ -1,1 +1,12 @@
-<p>profil works!</p>
+<h1>Profil</h1>
+<div class="container">
+    <p><strong>Prenom : </strong>{{utilisateur.prenom}}</p>
+    <p><strong>Nom : </strong>{{utilisateur.nom}}</p>
+    <p><strong>Mail : </strong>{{utilisateur.mail}}</p>
+    <p><strong>Telephone : </strong>{{utilisateur.telephone}}</p>
+    <p><strong>Adresse : </strong>{{utilisateur.adresse}}</p>
+    <p><strong>Ville : </strong>{{utilisateur.ville_utilisateur.ville}}</p>
+    <p><strong>Categorie : </strong>{{utilisateur.categorie_utilisateur.categorie}}</p>
+
+    <button [routerLink]="['/modif-profil']" routerLinkActive="active">Modifier mes informations personnelles</button>
+</div>
