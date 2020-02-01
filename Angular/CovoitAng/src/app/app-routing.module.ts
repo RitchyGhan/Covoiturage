@@ -6,8 +6,10 @@ import  {TrajetVueComponent} from './trajet-vue/trajet-vue.component';
 import  {AssociationUtilisateurComponent} from './association-utilisateur/association-utilisateur.component';
 import  {CreeTrajetComponent} from './cree-trajet/cree-trajet.component';
 import  {CovoiturageComponent} from './covoiturage/covoiturage.component';
+import  {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'recherche_trajet', component: RechercheTrajetComponent },
   { path: 'trajet/:id_trajet', component: TrajetVueComponent },
   { path: 'association_trajet/:id_utilisateur', component: AssociationUtilisateurComponent },
