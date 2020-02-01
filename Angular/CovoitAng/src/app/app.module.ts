@@ -13,8 +13,12 @@ import { TrajetVueComponent } from './trajet-vue/trajet-vue.component';
 import { AssociationUtilisateurComponent } from './association-utilisateur/association-utilisateur.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe  } from '@angular/common';
+<<<<<<< HEAD
 import { ConstantsService } from './common/services/constants.service';
 import { CovoiturageComponent } from './covoiturage/covoiturage.component';
+=======
+import { ModifProfilComponent } from './modif-profil/modif-profil.component';
+>>>>>>> f820c5b76f17bc843ed86a6c8852c88511892071
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { CovoiturageComponent } from './covoiturage/covoiturage.component';
     HomeComponent,
     TrajetVueComponent,
     AssociationUtilisateurComponent,
+<<<<<<< HEAD
     CovoiturageComponent
+=======
+    ModifProfilComponent
+>>>>>>> f820c5b76f17bc843ed86a6c8852c88511892071
   ],
   imports: [
     BrowserModule,
