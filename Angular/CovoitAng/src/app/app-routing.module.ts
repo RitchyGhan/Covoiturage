@@ -6,13 +6,10 @@ import  {TrajetVueComponent} from './trajet-vue/trajet-vue.component';
 import  {AssociationUtilisateurComponent} from './association-utilisateur/association-utilisateur.component';
 import  {CreeTrajetComponent} from './cree-trajet/cree-trajet.component';
 import  {CovoiturageComponent} from './covoiturage/covoiturage.component';
-<<<<<<< HEAD
 import  {ProfilComponent} from './profil/profil.component';
 import  {ModifProfilComponent} from './modif-profil/modif-profil.component';
 
-=======
 import  {HomeComponent} from './home/home.component';
->>>>>>> cbranch
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
