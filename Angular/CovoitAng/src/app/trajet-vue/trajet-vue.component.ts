@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DatePipe } from '@angular/common'
+import { ConstantsService } from '../common/services/constants.service';
 
 
 @Component({
@@ -18,13 +19,18 @@ export class TrajetVueComponent implements OnInit {
   valueRetour: any;
   inscriptionMessage: any;
   userForm : FormGroup;
+  id_user:string;	
+  baseApiUrl:string;
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private _constant: ConstantsService
   ) { 
+    this.id_user = this._constant.defaultUserId;
+    this.baseApiUrl = this._constant.baseApiUrl;
   }
   
 
@@ -50,7 +56,7 @@ export class TrajetVueComponent implements OnInit {
 
   doGET(){
     console.log('GET');
-    let url = 'http://127.0.0.1:8000/api/trajet/'+this.id;
+    let url = this.baseApiUrl+'trajet/'+this.id;
     this.http.get<any[]>(url).subscribe((response) => {
       this.valueRetour = response;
     },
@@ -67,13 +73,12 @@ export class TrajetVueComponent implements OnInit {
 
     formData.append("created", this.created);
     formData.append("updated", this.created);
-    formData.append("idUtilisateur", this.id_utilisateur);
+    formData.append("idUtilisateur", this.id_user);
     formData.append("idCo2", this.id_co2);
     formData.append("idTypeCovoit", this.id_type_covoit);
     formData.append("idTrajet", this.id);
 
-    console.log(new Date('2018-03-24'));
-    this.http.post('http://127.0.0.1:8000/api/covoiturage/new', formData).subscribe(
+    this.http.post(this.baseApiUrl+'covoiturage/new', formData).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     );
@@ -84,7 +89,6 @@ export class TrajetVueComponent implements OnInit {
   now = new Date();
   created = this.datepipe.transform(this.now, "y-m-d hh:MM:ss");
   //created = this.now.toISOString();
-  id_utilisateur = 1;
   id_co2 = 1;
   id_type_covoit = 2;
   id_trajet = this.id

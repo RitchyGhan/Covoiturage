@@ -57,19 +57,14 @@ class PostApiController extends Controller
 
         $trajet = new Trajet();
         $trajet->setDateDepart(new \DateTime($request->request->get('dateDepart')));
-        $trajet->setDateDepart(new \DateTime($request->request->get('heureDepart')));
+        $trajet->setHeureDepart(new \DateTime($request->request->get('heureDepart')));
         $form = $this->createForm('BackOfficeBundle\Form\TrajetType',$trajet);
         $form->submit($request->request->all()); // Validation des donnees
 
-        if ($form->isValid()) {
-            $em = $this->get('doctrine.orm.entity_manager');
-            $em->persist($trajet);
-            $em->flush();
-            //return $trajet
-        } else {
-            //return $form;
-            //$erreur = TRUE;
-        }
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->persist($trajet);
+        $em->flush();
+
         $encoders = [new JsonEncoder()];
         
         $normalizers = [new ObjectNormalizer()];
