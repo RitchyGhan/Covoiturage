@@ -871,7 +871,7 @@ class GetApiController extends Controller
                 'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture WHERE i.id ='.$id
             );
 
-        $trajet[0]['possede_trajet']['Voiture_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['voiture_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture marque
         $em = $this->getDoctrine()->getEntityManager()

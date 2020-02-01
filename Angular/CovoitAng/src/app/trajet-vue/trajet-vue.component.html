@@ -1,0 +1,37 @@
+<div *ngFor="let trajet of valueRetour">
+    <h3>Informations trajet</h3>
+    <ul>
+        <li>Type de trajet :</li>
+        <li>Date Depart : {{trajet.dateDepart.date | date:'dd-MM-yyyy'}}</li>
+        <li>Heure Depart : {{trajet.heureDepart.date | date:'shortTime'}}</li>
+        <li>Ville Depart : {{trajet.ville_depart_trajet.ville}}</li>
+        <li>Ville Arrivee : {{trajet.ville_arrivee_trajet.ville}}</li>
+        <li>duree estime: {{trajet.duree}}</li>
+        <li>Nombre Km : {{trajet.nbKm}}</li>
+        <li>Il reste <u><strong>{{trajet.nbPlace}}</strong></u> Place pour ce trajet</li>
+    </ul>
+
+    <h3>Information Conducteur:</h3>
+    <ul>
+        <li>Nom : {{trajet.possede_trajet.utilisateur_possede.nom}}</li>
+        <li>Prenom : {{trajet.possede_trajet.utilisateur_possede.prenom}}</li>
+        <li>e-mail: {{trajet.possede_trajet.utilisateur_possede.mail}}</li>
+        <li>Telephone : {{trajet.possede_trajet.utilisateur_possede.mail}}</li>
+        <li>Categorie Utilisateur : {{trajet.possede_trajet.utilisateur_possede.categorie_utilisateur.categorie}}</li>
+    </ul>
+
+    <h3>Information Vehicule:</h3>
+    <ul>
+        <li>Immatriculation : {{trajet.possede_trajet.immatriculation}}</li>
+        <li>Modele : {{trajet.possede_trajet.voiture_possede.modele}}</li>
+        <li>Marque : {{trajet.possede_trajet.voiture_possede.marque_voiture.marque}}</li>
+        <li>Type de vehicule : {{trajet.possede_trajet.voiture_possede.type_vehicule_voiture.type}}</li>
+    </ul>
+
+    <h3>commentaire du conducteur :</h3>
+    <p>{{trajet.commentaire}}</p>
+    <form (ngSubmit)="register()" [formGroup]="userForm">
+        <button type="submit" [disabled]="userForm.invalid">inscription covoiturage</button>
+    </form>
+    <br>{{inscriptionMessage}}
+</div>

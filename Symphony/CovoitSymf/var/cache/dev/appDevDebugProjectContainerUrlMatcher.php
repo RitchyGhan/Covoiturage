@@ -108,79 +108,21 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         elseif (0 === strpos($pathinfo, '/api')) {
-            if (0 === strpos($pathinfo, '/api/t')) {
-                // api_test
-                if ('/api/test1' === $pathinfo) {
-                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::TestAction',  '_route' => 'api_test',);
-                }
-
-                if (0 === strpos($pathinfo, '/api/type_')) {
-                    if (0 === strpos($pathinfo, '/api/type_covoit')) {
-                        // api_typeCovoit_all
-                        if ('/api/type_covoit' === $pathinfo) {
-                            return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeCovoitAction',  '_route' => 'api_typeCovoit_all',);
-                        }
-
-                        // api_typeCovoit_one
-                        if (preg_match('#^/api/type_covoit/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                            return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeCovoit_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeCovoitAction',));
-                        }
-
+            if (0 === strpos($pathinfo, '/api/c')) {
+                if (0 === strpos($pathinfo, '/api/covoiturage')) {
+                    // api_covoiturage_new
+                    if ('/api/covoiturage/new' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\PostApiController::postNewCovoiturageAction',  '_route' => 'api_covoiturage_new',);
                     }
 
-                    elseif (0 === strpos($pathinfo, '/api/type_trajet')) {
-                        // api_typeTrajet_all
-                        if ('/api/type_trajet' === $pathinfo) {
-                            return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeTrajetAction',  '_route' => 'api_typeTrajet_all',);
-                        }
-
-                        // api_typeTrajet_one
-                        if (preg_match('#^/api/type_trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                            return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeTrajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeTrajetAction',));
-                        }
-
+                    // api_covoiturage_all
+                    if ('/api/covoiturage' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCovoiturageAction',  '_route' => 'api_covoiturage_all',);
                     }
 
-                    elseif (0 === strpos($pathinfo, '/api/type_vehicule')) {
-                        // api_typeVehicule_all
-                        if ('/api/type_vehicule' === $pathinfo) {
-                            return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeVehiculeAction',  '_route' => 'api_typeVehicule_all',);
-                        }
-
-                        // api_typeVehicule_one
-                        if (preg_match('#^/api/type_vehicule/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                            return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeVehicule_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeVehiculeAction',));
-                        }
-
-                    }
-
-                }
-
-                elseif (0 === strpos($pathinfo, '/api/trajet')) {
-                    // api_trajet_all
-                    if ('/api/trajet' === $pathinfo) {
-                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTrajetAction',  '_route' => 'api_trajet_all',);
-                    }
-
-                    // api_trajet_one
-                    if (preg_match('#^/api/trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_trajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTrajetAction',));
-                    }
-
-                }
-
-            }
-
-            elseif (0 === strpos($pathinfo, '/api/c')) {
-                if (0 === strpos($pathinfo, '/api/categorie')) {
-                    // api_categorie_all
-                    if ('/api/categorie' === $pathinfo) {
-                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCategorieAction',  '_route' => 'api_categorie_all',);
-                    }
-
-                    // api_categorie_one
-                    if (preg_match('#^/api/categorie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_categorie_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCategorieAction',));
+                    // api_covoiturage_one
+                    if (preg_match('#^/api/covoiturage/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_covoiturage_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCovoiturageAction',));
                     }
 
                 }
@@ -198,15 +140,75 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
                 }
 
-                elseif (0 === strpos($pathinfo, '/api/covoiturage')) {
-                    // api_covoiturage_all
-                    if ('/api/covoiturage' === $pathinfo) {
-                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCovoiturageAction',  '_route' => 'api_covoiturage_all',);
+                elseif (0 === strpos($pathinfo, '/api/categorie')) {
+                    // api_categorie_all
+                    if ('/api/categorie' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllCategorieAction',  '_route' => 'api_categorie_all',);
                     }
 
-                    // api_covoiturage_one
-                    if (preg_match('#^/api/covoiturage/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_covoiturage_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCovoiturageAction',));
+                    // api_categorie_one
+                    if (preg_match('#^/api/categorie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_categorie_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCategorieAction',));
+                    }
+
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/trajet')) {
+                // api_trajet_new
+                if ('/api/trajet/new' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\PostApiController::postNewTrajetAction',  '_route' => 'api_trajet_new',);
+                }
+
+                // api_trajet_all
+                if ('/api/trajet' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTrajetAction',  '_route' => 'api_trajet_all',);
+                }
+
+                // api_trajet_one
+                if (preg_match('#^/api/trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_trajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTrajetAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/type_')) {
+                if (0 === strpos($pathinfo, '/api/type_covoit')) {
+                    // api_typeCovoit_all
+                    if ('/api/type_covoit' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeCovoitAction',  '_route' => 'api_typeCovoit_all',);
+                    }
+
+                    // api_typeCovoit_one
+                    if (preg_match('#^/api/type_covoit/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeCovoit_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeCovoitAction',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/type_trajet')) {
+                    // api_typeTrajet_all
+                    if ('/api/type_trajet' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeTrajetAction',  '_route' => 'api_typeTrajet_all',);
+                    }
+
+                    // api_typeTrajet_one
+                    if (preg_match('#^/api/type_trajet/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeTrajet_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeTrajetAction',));
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/api/type_vehicule')) {
+                    // api_typeVehicule_all
+                    if ('/api/type_vehicule' === $pathinfo) {
+                        return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllTypeVehiculeAction',  '_route' => 'api_typeVehicule_all',);
+                    }
+
+                    // api_typeVehicule_one
+                    if (preg_match('#^/api/type_vehicule/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_typeVehicule_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneTypeVehiculeAction',));
                     }
 
                 }

@@ -20,7 +20,8 @@ class TrajetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackOfficeBundle\Entity\Trajet'
+            'data_class' => 'BackOfficeBundle\Entity\Trajet',
+            'csrf_protection' => false
         ));
     }
 

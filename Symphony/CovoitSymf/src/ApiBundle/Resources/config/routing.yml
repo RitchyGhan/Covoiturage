@@ -1,7 +1,11 @@
-api_test:
-    path:     /test1
-    defaults: { _controller: ApiBundle:GetApi:Test }
-    
+api_covoiturage_new:
+    path:     /covoiturage/new
+    defaults: { _controller: ApiBundle:PostApi:postNewCovoiturage }
+
+api_trajet_new:
+    path:     /trajet/new
+    defaults: { _controller: ApiBundle:PostApi:postNewTrajet }
+
 api_categorie_all:
     path:     /categorie
     defaults: { _controller: ApiBundle:GetApi:GetAllCategorie }
