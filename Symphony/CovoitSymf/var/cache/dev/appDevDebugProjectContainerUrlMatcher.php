@@ -108,7 +108,25 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         elseif (0 === strpos($pathinfo, '/api')) {
-            if (0 === strpos($pathinfo, '/api/c')) {
+            if (0 === strpos($pathinfo, '/api/utilisateur')) {
+                // api_modify_utilisateur
+                if ('/api/utilisateur/modify' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\PostApiController::modifyUtilisateurAction',  '_route' => 'api_modify_utilisateur',);
+                }
+
+                // api_utilisateur_all
+                if ('/api/utilisateur' === $pathinfo) {
+                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllUtilisateurAction',  '_route' => 'api_utilisateur_all',);
+                }
+
+                // api_utilisateur_one
+                if (preg_match('#^/api/utilisateur/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_utilisateur_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneUtilisateurAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/api/c')) {
                 if (0 === strpos($pathinfo, '/api/covoiturage')) {
                     // api_covoiturage_new
                     if ('/api/covoiturage/new' === $pathinfo) {
@@ -250,19 +268,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 // api_voiture_one
                 if (preg_match('#^/api/voiture/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_voiture_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneVoitureAction',));
-                }
-
-            }
-
-            elseif (0 === strpos($pathinfo, '/api/utilisateur')) {
-                // api_utilisateur_all
-                if ('/api/utilisateur' === $pathinfo) {
-                    return array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetAllUtilisateurAction',  '_route' => 'api_utilisateur_all',);
-                }
-
-                // api_utilisateur_one
-                if (preg_match('#^/api/utilisateur/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_utilisateur_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneUtilisateurAction',));
                 }
 
             }

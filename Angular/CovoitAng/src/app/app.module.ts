@@ -13,6 +13,7 @@ import { TrajetVueComponent } from './trajet-vue/trajet-vue.component';
 import { AssociationUtilisateurComponent } from './association-utilisateur/association-utilisateur.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe  } from '@angular/common';
+import { ModifProfilComponent } from './modif-profil/modif-profil.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DatePipe  } from '@angular/common';
     ProfilComponent,
     HomeComponent,
     TrajetVueComponent,
-    AssociationUtilisateurComponent
+    AssociationUtilisateurComponent,
+    ModifProfilComponent
   ],
   imports: [
     BrowserModule,

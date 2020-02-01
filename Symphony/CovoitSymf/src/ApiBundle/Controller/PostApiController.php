@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BackOfficeBundle\Entity;
 use BackOfficeBundle\Entity\Covoiturage;
 use BackOfficeBundle\Entity\Trajet;
+use BackOfficeBundle\Entity\Utilisateur;
 use BackOfficeBundle\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,6 +82,41 @@ class PostApiController extends Controller
             $response->setContent(json_encode("erreur enregistrement donnees"));
         } else {
             $response->setContent($serializer->serialize($trajet, 'json'));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
+    }
+    
+    public function modifyUtilisateurAction(Request $request)
+    {
+        $erreur = FALSE;
+
+        $utilisateur = new Utilisateur();
+        
+        $em = $this->get('doctrine.orm.entity_manager');
+
+        $utilisateur = $em->getRepository("BackOfficeBundle:Utilisateur")->findOneById($request->request->get('id'));
+    
+    
+        $form = $this->createForm('BackOfficeBundle\Form\UtilisateurType',$utilisateur);
+        $form->submit($request->request->all()); // Validation des donnees
+        
+        //$em->persist($utilisateur);
+        $em->flush();
+        
+        $encoders = [new JsonEncoder()];
+        
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $response = new Response();
+        if($erreur){
+            $response->setContent(json_encode("erreur enregistrement donnees"));
+        } else {
+            $response->setContent($serializer->serialize($utilisateur, 'json'));
         }
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');

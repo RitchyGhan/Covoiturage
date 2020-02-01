@@ -1,0 +1,32 @@
+<form (ngSubmit)="modif()" [formGroup]="userForm">
+ <div>
+    <label>Nom</label><input formControlName="nom" >
+    <label>Prénom</label><input formControlName="prenom" >
+ </div>
+ <div>
+    <label>Mail</label><input formControlName="mail" >
+    <label>Tél.</label><input formControlName="tel" >
+ </div>
+ <div>
+    <label>Adresse</label><input formControlName="adresse" >
+    <label>Ville</label>
+    <select formControlName="id_ville">
+        <option [ngValue]="null" disabled>choix ville</option>
+        <option *ngFor="let value of ville" [ngValue]="value.id">
+            {{ value.ville }}
+        </option>
+    </select>
+ </div>
+
+ <div>
+    <label>Categorie d'utilisateur</label>
+    <select formControlName="id_categorie">
+        <option [ngValue]="null" disabled>choix categorie</option>
+        <option *ngFor="let value of categorie" [ngValue]="value.id">
+            {{ value.categorie }}
+        </option>
+    </select>
+ </div>
+ 
+ <button type="submit" [disabled]="userForm.invalid">Modifier mes info personnelles</button>
+</form>
