@@ -13,6 +13,8 @@ import { TrajetVueComponent } from './trajet-vue/trajet-vue.component';
 import { AssociationUtilisateurComponent } from './association-utilisateur/association-utilisateur.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe  } from '@angular/common';
+import { ConstantsService } from './common/services/constants.service';
+import { CovoiturageComponent } from './covoiturage/covoiturage.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { DatePipe  } from '@angular/common';
     ProfilComponent,
     HomeComponent,
     TrajetVueComponent,
-    AssociationUtilisateurComponent
+    AssociationUtilisateurComponent,
+    CovoiturageComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { DatePipe  } from '@angular/common';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,ConstantsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

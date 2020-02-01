@@ -1,0 +1,23 @@
+<div id='covoitComp'>
+        <table>
+            <tr>
+                <th>Date Depart</th>
+                <th>heure Depart</th>
+                <th>Ville Depart</th>
+                <th>Ville Arrivee</th>
+                <th>Type Trajet</th>
+                <th>Type Covoiturage</th>
+            </tr>
+            <tr *ngFor="let covoit of valueRetour">
+                <td>{{covoit.trajet_covoiturage.dateDepart.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{covoit.trajet_covoiturage.heureDepart.date | date:'shortTime'}}</td>
+                <td>{{covoit.trajet_covoiturage.ville_depart_trajet.ville}}</td>
+                <td>{{covoit.trajet_covoiturage.ville_arrivee_trajet.ville}}</td>
+                <td>{{covoit.trajet_covoiturage.type_trajet_trajet.typeTrajet}}</td>
+                <td>{{covoit.type_covoit_covoiturage.type}}</td>
+             </tr>
+    
+        </table>
+    </div>
+
+<!-- Date depart / Heure depart / Ville depart / Ville arrivee / type trajet / type covoit-->

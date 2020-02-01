@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { ConstantsService } from '../common/services/constants.service';
 
 @Component({
   selector: 'app-cree-trajet',
   templateUrl: './cree-trajet.component.html',
-  styleUrls: ['./cree-trajet.component.css']
+  styleUrls: ['./cree-trajet.component.css'],
 })
 @Injectable()
 export class CreeTrajetComponent implements OnInit {
@@ -15,12 +16,19 @@ export class CreeTrajetComponent implements OnInit {
   ville : any;
   possede : any;
   type_trajet : any;
+  id_user:string;	
+  baseApiUrl:string;
+  
 
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
-    ) { }
+    private http: HttpClient,
+    private _constant: ConstantsService
+    ) {
+      this.id_user = this._constant.defaultUserId;
+      this.baseApiUrl = this._constant.baseApiUrl;
+     }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -44,7 +52,7 @@ export class CreeTrajetComponent implements OnInit {
   doGET(){
     //ville
     console.log('GET');
-    let url = 'http://127.0.0.1:8000/api/ville';
+    let url = this.baseApiUrl+'ville';
     this.http.get<any[]>(url).subscribe((response) => {
       this.ville = response;
     },
@@ -54,7 +62,7 @@ export class CreeTrajetComponent implements OnInit {
 
     //possede
     console.log('GET');
-    url = 'http://127.0.0.1:8000/api/possede';
+    url = this.baseApiUrl+'possede/utilisateur/'+this.id_user;
     this.http.get<any[]>(url).subscribe((response) => {
       this.possede = response;
     },
@@ -64,7 +72,7 @@ export class CreeTrajetComponent implements OnInit {
 
     //type trajet
     console.log('GET');
-    url = 'http://127.0.0.1:8000/api/type_trajet';
+    url = this.baseApiUrl+'type_trajet';
     this.http.get<any[]>(url).subscribe((response) => {
       this.type_trajet = response;
     },
@@ -90,10 +98,11 @@ export class CreeTrajetComponent implements OnInit {
     formData.append("idPossede",this.userForm.value['id_possede']);
     formData.append("idTypeTrajet",this.userForm.value['id_type_trajet']);
 
-    this.http.post('http://127.0.0.1:8000/api/trajet/new', formData).subscribe(
+    this.http.post(this.baseApiUrl+'trajet/new', formData).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     );
+
   }
 
 }
