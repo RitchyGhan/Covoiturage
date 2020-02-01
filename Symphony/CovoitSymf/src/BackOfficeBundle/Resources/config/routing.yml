@@ -46,6 +46,9 @@ back_office_typetrajet:
     resource: "@BackOfficeBundle/Resources/config/routing/typetrajet.yml"
     prefix:   /typetrajet
 
+
+
 back_office_homepage:
     path:     /
-    defaults: { _controller: BackOfficeBundle:Default:index }
+    defaults: { _controller: BackOfficeBundle:Home:index }
+    

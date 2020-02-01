@@ -5,8 +5,24 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('menu.css') }}" />
     </head>
     <body>
+        <ul id="menu">
+            <li><a href="{{ path('back_office_homepage') }}">Home</a></li>
+            <li><a href="{{ path('categorie_index') }}">Categorie</a></li>
+            <li><a href="{{ path('co2_index') }}">CO2</a></li>
+            <li><a href="{{ path('covoiturage_index') }}">Covoiturage</a></li>
+            <li><a href="{{ path('marque_index') }}">Marque</a></li>
+            <li><a href="{{ path('possede_index') }}">Possede</a></li>
+            <li><a href="{{ path('trajet_index') }}">Trajet</a></li>
+            <li><a href="{{ path('typecovoit_index') }}">Type Covoit</a></li>
+            <li><a href="{{ path('typetrajet_index') }}">Type Trajet</a></li>
+            <li><a href="{{ path('typevehicule_index') }}">Type Vehicule</a></li>
+            <li><a href="{{ path('utilisateur_index') }}">Utilisateur</a></li>
+            <li><a href="{{ path('ville_index') }}">Ville</a></li>
+            <li><a href="{{ path('voiture_index') }}">Voiture</a></li>
+        </ul>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

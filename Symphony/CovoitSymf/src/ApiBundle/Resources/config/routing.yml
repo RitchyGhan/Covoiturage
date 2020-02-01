@@ -1,3 +1,7 @@
+api_test:
+    path:     /test1
+    defaults: { _controller: ApiBundle:GetApi:Test }
+    
 api_categorie_all:
     path:     /categorie
     defaults: { _controller: ApiBundle:GetApi:GetAllCategorie }

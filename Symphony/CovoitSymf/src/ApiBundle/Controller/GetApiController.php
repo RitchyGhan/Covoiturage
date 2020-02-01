@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class GetApiController extends Controller
 {
+
     public function GetAllCategorieAction(Request $request)
     {
 
@@ -402,6 +403,45 @@ class GetApiController extends Controller
             );
 
         $user[0]['categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        
+        
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j.id, j.immatriculation, j.nbPlace, v.id AS idVoiture FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Possede AS j WITH j.idUtilisateur = i.id JOIN BackOfficeBundle:Voiture AS v WITH v.id = j.idVoiture WHERE i.id ='.$id
+            );
+        
+        $user[0]['possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        
+        for($i=0; $i<count($user[0]['possede']); $i++)
+        {
+            //possede voiture base
+            $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH i.idVoiture = j.id WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
+            );
+
+            $user[0]['possede'][$i]['voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+
+        //possede voiture marque
+            $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
+            );
+
+            $user[0]['possede'][$i]['voiture']['marque'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+
+        //possede voiture type vehicule
+            $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
+            );
+
+            $user[0]['possede'][$i]['voiture']['type_vehicule'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+            unset($user[0]['possede'][$i]['idVoiture']);
+        }
+        
+        
         
         $response = new Response();
         
