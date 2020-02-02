@@ -1317,5 +1317,379 @@ class GetApiController extends Controller
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
+
+
+
+
+
+
+
+
+
+
+    public function GetPossedeUtilisateurAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT i FROM BackOfficeBundle:Possede i WHERE i.idUtilisateur ='.$id.'ORDER BY i.immatriculation ASC'
+            );
+        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+        //USER PART :
+
+        //Possede user base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur  WHERE i.idUtilisateur ='.$id.' ORDER BY i.immatriculation ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $possede[$i]['utilisateur_possede'] = $value;
+            $i ++;
+        }
+
+        //Possede user ville
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille  WHERE i.idUtilisateur ='.$id.' ORDER BY i.immatriculation ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $possede[$i]['utilisateur_possede']['ville_utilisateur'] = $value;
+            $i ++;
+        }
+
+        //Possede user categorie
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.idUtilisateur ='.$id.' ORDER BY i.immatriculation ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $possede[$i]['utilisateur_possede']['categorie_utilisateur'] = $value;
+            $i ++;
+        }
+
+        // VOITURE PART :
+
+        //Possede voiture base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture   WHERE i.idUtilisateur ='.$id.' ORDER BY i.immatriculation ASC'
+            );
+
+        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($voiture as $value){
+            $possede[$i]['voiture_possede'] = $value;
+            $i ++;
+        }
+
+        //Possede voiture Marque
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque  WHERE i.idUtilisateur ='.$id.' ORDER BY i.immatriculation ASC'
+            );
+
+        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($voiture as $value){
+            $possede[$i]['voiture_possede']['marque_voiture'] = $value;
+            $i ++;
+        }
+
+        //Possede voiture type Vehicule
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.idUtilisateur ='.$id.'  ORDER BY i.immatriculation ASC'
+            );
+
+        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($voiture as $value){
+            $possede[$i]['voiture_possede']['type_vehicule_voiture'] = $value;
+            $i ++;
+        }
+
+        $response = new Response();
+        
+        $response->setContent(json_encode($possede));
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+
+
+
+
+
+
+
+
+    public function GetCovoiturageUtilisateurAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT i FROM BackOfficeBundle:Covoiturage i WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+        $covoiturage = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+        //Covoiturage type covoit
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:TypeCovoit AS j WITH j.id = i.idTypeCovoit WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $covoit = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($covoit as $value){
+            $covoiturage[$i]['type_covoit_covoiturage'] = $value;
+            $i ++;
+        }
+
+        //covoiturage CO2
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Co2 AS j WITH j.id = i.idCo2 WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $co2 = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($co2 as $value){
+            $covoiturage[$i]['co2_covoiturage'] = $value;
+            $i ++;
+        }
+
+
+        //USER PART :
+
+        //Covoiturage user base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $covoiturage[$i]['utilisateur_covoiturage'] = $value;
+            $i ++;
+        }
+
+        //covoiturage user ville
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $covoiturage[$i]['utilisateur_covoiturage']['ville_utilisateur'] = $value;
+            $i ++;
+        }
+        //covoiturage user categorie
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($user as $value){
+            $covoiturage[$i]['utilisateur_covoiturage']['categorie_utilisateur'] = $value;
+            $i ++;
+        }
+
+
+        //TRAJET PART :
+
+        //Covoiturage trajet base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage'] = $value;
+            $i ++;
+        }
+
+        //Covoiturage Trajet Ville Depart
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['ville_depart_trajet'] = $value;
+            $i ++;
+        }
+        //Covoiturage Trajet Ville Arriver
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVilleVilleArrivee WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['ville_arrivee_trajet'] = $value;
+            $i ++;
+        }
+
+        //Covoiturage Trajet type_trajet
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:TypeTrajet AS k WITH k.id = j.idTypeTrajet WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['type_trajet_trajet'] = $value;
+            $i ++;
+        }
+
+
+        //TRAJET POSSEDE PARTIE
+
+        //trajet possede base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet'] = $value;
+            $i ++;
+        }
+
+
+        //TRAJET POSSEDE USER PART
+
+        //trajet possede user base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['utilisateur_possede'] = $value;
+            $i ++;
+        }
+
+        //trajet possede user ville
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Ville AS m WITH m.id = l.idVille WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['ville_utilisateur'] = $value;
+            $i ++;
+        }
+
+        //trajet possede user categorie
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Categorie AS m WITH m.id = l.idCategorie WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['categorie_utilisateur'] = $value;
+            $i ++;
+        }
+        
+        //TRAJET POSSEDE VOITURE PART
+
+        //trajet possede voiture base
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['voiture_possede'] = $value;
+            $i ++;
+        }
+
+        //trajet possede voiture marque
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:Marque AS m WITH m.id = l.idMarque WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['voiture_possede']['marque_voiture'] = $value;
+            $i ++;
+        }
+
+        //trajet possede voiture type vehicule
+        $em = $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:TypeVehicule AS m WITH m.id = l.idTypeVehicule WHERE i.idUtilisateur ='.$id.' ORDER BY i.created ASC'
+            );
+
+        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        
+        $i = 0;
+        foreach ($trajet as $value){
+            $covoiturage[$i]['trajet_covoiturage']['possede_trajet']['voiture_possede']['type_vehicule_voiture'] = $value;
+            $i ++;
+        }
+
+        $response = new Response();
+        
+        $response->setContent(json_encode($covoiturage));
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
 }
 

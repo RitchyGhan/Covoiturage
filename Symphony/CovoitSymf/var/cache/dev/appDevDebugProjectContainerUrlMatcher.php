@@ -143,6 +143,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                         return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_covoiturage_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOneCovoiturageAction',));
                     }
 
+                    // api_covoiturage_utilisateur
+                    if (0 === strpos($pathinfo, '/api/covoiturage/utilisateur') && preg_match('#^/api/covoiturage/utilisateur/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_covoiturage_utilisateur']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetCovoiturageUtilisateurAction',));
+                    }
+
                 }
 
                 elseif (0 === strpos($pathinfo, '/api/co2')) {
@@ -281,6 +286,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 // api_possede_one
                 if (preg_match('#^/api/possede/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_possede_one']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetOnePossedeAction',));
+                }
+
+                // api_possede_utilisateur
+                if (0 === strpos($pathinfo, '/api/possede/utilisateur') && preg_match('#^/api/possede/utilisateur/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'api_possede_utilisateur']), array (  '_controller' => 'ApiBundle\\Controller\\GetApiController::GetPossedeUtilisateurAction',));
                 }
 
             }

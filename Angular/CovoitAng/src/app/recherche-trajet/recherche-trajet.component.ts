@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConstantsService } from '../common/services/constants.service';
 
 @Component({
   selector: 'app-recherche-trajet',
@@ -10,8 +11,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class RechercheTrajetComponent {
 
-  constructor(private http: HttpClient) { }
   valueRetour: any;
+  baseApiUrl:string;
+  constructor(
+    private http: HttpClient,
+    private _constant: ConstantsService) {
+      this.baseApiUrl = this._constant.baseApiUrl;
+     }
+  
 
   ngAfterViewInit() {
     this.doGET();
@@ -20,7 +27,7 @@ export class RechercheTrajetComponent {
   //recuperation information du trajet
   doGET(){
     console.log('GET');
-    let url = 'http://127.0.0.1:8000/api/trajet';
+    let url = this.baseApiUrl+'trajet';
     this.http.get<any[]>(url).subscribe((response) => {
       this.valueRetour = response;
     },

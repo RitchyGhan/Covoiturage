@@ -105,3 +105,11 @@ api_covoiturage_all:
 api_covoiturage_one:
     path:     /covoiturage/{id}
     defaults: { _controller: ApiBundle:GetApi:GetOneCovoiturage }
+
+api_possede_utilisateur:
+    path:     /possede/utilisateur/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetPossedeUtilisateur }
+
+api_covoiturage_utilisateur:
+    path:     /covoiturage/utilisateur/{id}
+    defaults: { _controller: ApiBundle:GetApi:GetCovoiturageUtilisateur }
