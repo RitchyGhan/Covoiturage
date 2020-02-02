@@ -14,8 +14,16 @@
                 <td>{% if covoiturage.updated %}{{ covoiturage.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Id</th>
-                <td>{{ covoiturage.id }}</td>
+                <th>Utilisateur</th>
+                <td>{{ covoiturage.idUtilisateur.mail }}</td>
+            </tr>
+            <tr>
+                <th>Type covoit</th>
+                <td>{{ covoiturage.idTypeCovoit.type }}</td>
+            </tr>
+            <tr>
+                <th>Co2</th>
+                <td>{{ covoiturage.idCo2.valCo2 }}</td>
             </tr>
         </tbody>
     </table>

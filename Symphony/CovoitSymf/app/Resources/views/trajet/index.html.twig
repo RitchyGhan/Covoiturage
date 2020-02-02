@@ -13,6 +13,10 @@
                 <th>Commentaire</th>
                 <th>Nbkm</th>
                 <th>Id</th>
+                <th>Ville depart</th>
+                <th>Ville arrivee</th>
+                <th>Type trajet</th>
+                <th>Voiture utilisée</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +30,10 @@
                 <td>{{ trajet.commentaire }}</td>
                 <td>{{ trajet.nbKm }}</td>
                 <td>{{ trajet.id }}</td>
+                <td>{{ trajet.idVille.ville }}</td>
+                <td>{{ trajet.idVilleVilleArrivee.ville }}</td>
+                <td>{{ trajet.idTypeTrajet.typeTrajet }}</td>
+                <td>{{ trajet.idPossede.immatriculation }}</td>
                 <td>
                     <ul>
                         <li>
