@@ -9,7 +9,10 @@
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Type covoit</th>
                 <th>Actions</th>
+                <th>Co2</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +21,9 @@
                 <td><a href="{{ path('covoiturage_show', { 'id': covoiturage.id }) }}">{{ covoiturage.created|date('Y-m-d H:i:s') }}</a></td>
                 <td>{% if covoiturage.updated %}{{ covoiturage.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ covoiturage.id }}</td>
+                <td>{{ covoiturage.idUtilisateur.mail }}</td>
+                <td>{{ covoiturage.idTypeCovoit.type }}</td>
+                <td>{{ covoiturage.idCo2.valCo2 }}</td>
                 <td>
                     <ul>
                         <li>
