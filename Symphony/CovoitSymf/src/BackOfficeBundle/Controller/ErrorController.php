@@ -1,5 +1,9 @@
 
 <?php
+/**
+   * @Author: Huguen Clément
+   * @Author: Marius Bethelot
+   */
 
 namespace BackOfficeBundle\Controller;
 
