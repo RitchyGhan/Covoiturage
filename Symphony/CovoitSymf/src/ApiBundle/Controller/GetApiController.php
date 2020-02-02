@@ -17,11 +17,11 @@ class GetApiController extends Controller
         //recuperation de la liste des internaute au travers du repository
         //$categories = $em->getRepository('BackOfficeBundle:Categorie')->findByCategorieOrderedRest(); marche po :´(
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Categorie i ORDER BY i.categorie ASC'
             );
-        $categories = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $categories = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         //reponse du controlleur en indiquant le format JSON et
         //en ajoutant la balise "Access-Control-Allow-Origin"
         //dans l'en-tete HTTP pour eviter les probleme de refus du au CORS
@@ -36,11 +36,11 @@ class GetApiController extends Controller
     public function GetOneCategorieAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Categorie i WHERE i.id ='.$id
-            );
-        $categorie = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Categorie i WHERE i.id =:id'
+            )->setParameter('id', $id);
+        $categorie = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -53,11 +53,11 @@ class GetApiController extends Controller
     public function GetAllCo2Action(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Co2 i ORDER BY i.id ASC'
             );
-        $co2 = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $co2 = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -70,11 +70,11 @@ class GetApiController extends Controller
     public function GetOneCo2Action(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Co2 i WHERE i.id ='.$id
-            );
-        $co2 = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Co2 i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $co2 = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -87,11 +87,11 @@ class GetApiController extends Controller
     public function GetAllMarqueAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Marque i ORDER BY i.marque ASC'
             );
-        $marques = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $marques = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -104,11 +104,11 @@ class GetApiController extends Controller
     public function GetOneMarqueAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Marque i WHERE i.id ='.$id
-            );
-        $marque = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Marque i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $marque = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -121,11 +121,11 @@ class GetApiController extends Controller
     public function GetAllTypeCovoitAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:TypeCovoit i ORDER BY i.type ASC'
             );
-        $typeCovoit = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $typeCovoit = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -138,11 +138,11 @@ class GetApiController extends Controller
     public function GetOneTypeCovoitAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:TypeCovoit i WHERE i.id ='.$id
-            );
-        $typeCovoit = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:TypeCovoit i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $typeCovoit = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -155,11 +155,11 @@ class GetApiController extends Controller
     public function GetAllTypeTrajetAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:TypeTrajet i ORDER BY i.typeTrajet ASC'
             );
-        $typeTrajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $typeTrajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -172,11 +172,11 @@ class GetApiController extends Controller
     public function GetOneTypeTrajetAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:TypeTrajet i WHERE i.id ='.$id
-            );
-        $typeTrajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:TypeTrajet i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $typeTrajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -189,11 +189,11 @@ class GetApiController extends Controller
     public function GetAllTypeVehiculeAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:TypeVehicule i ORDER BY i.id ASC'
             );
-        $typeVehicule = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $typeVehicule = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -206,11 +206,11 @@ class GetApiController extends Controller
     public function GetOneTypeVehiculeAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:TypeVehicule i WHERE i.id ='.$id
-            );
-        $typeVehicule = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:TypeVehicule i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $typeVehicule = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -223,11 +223,11 @@ class GetApiController extends Controller
     public function GetAllVilleAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Ville i ORDER BY i.ville ASC'
             );
-        $villes = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $villes = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $response = new Response();
         
@@ -240,11 +240,11 @@ class GetApiController extends Controller
     public function GetOneVilleAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Ville i WHERE i.id ='.$id
-            );
-        $ville = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Ville i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $ville = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $response = new Response();
         
@@ -257,20 +257,20 @@ class GetApiController extends Controller
     public function GetAllVoitureAction(Request $request)
     {
         //Voiture de base 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Voiture i ORDER BY i.modele ASC'
             );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         // Marque voiture
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:Marque AS j WITH j.id = i.idMarque ORDER BY i.modele ASC'
             );
 
-        $marque = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $marque = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($marque as $value){
@@ -279,12 +279,12 @@ class GetApiController extends Controller
         }
 
         // type voiture
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:TypeVehicule AS j WITH j.id = i.idTypeVehicule ORDER BY i.modele ASC'
             );
 
-        $typeVehicule = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $typeVehicule = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         $i = 0;
         foreach ($typeVehicule as $value){
@@ -303,27 +303,27 @@ class GetApiController extends Controller
     public function GetOneVoitureAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Voiture i WHERE i.id ='.$id
-            );
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Voiture i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         // Marque voiture
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:Marque AS j WITH j.id = i.idMarque WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:Marque AS j WITH j.id = i.idMarque WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $voiture[0]['marque_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $voiture[0]['marque_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         // type voiture
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:TypeVehicule AS j WITH j.id = i.idTypeVehicule WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Voiture i JOIN BackOfficeBundle:TypeVehicule AS j WITH j.id = i.idTypeVehicule WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $voiture[0]['type_vehicule_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $voiture[0]['type_vehicule_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         
         $response = new Response();
@@ -337,19 +337,19 @@ class GetApiController extends Controller
     public function GetAllUtilisateurAction(Request $request)
     {
         // user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Utilisateur i ORDER BY i.nom ASC'
             );
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //user Ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille ORDER BY i.nom ASC'
             );
 
-        $ville = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $ville = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($ville as $value){
@@ -358,12 +358,12 @@ class GetApiController extends Controller
         }
 
         //user Categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Categorie AS j WITH j.id = i.idCategorie ORDER BY i.nom ASC'
             );
 
-        $categorie = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $categorie = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($categorie as $value){
@@ -382,62 +382,63 @@ class GetApiController extends Controller
     public function GetOneUtilisateurAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Utilisateur i WHERE i.id ='.$id
-            );
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Utilisateur i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $user[0]['ville_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $user[0]['ville_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Categorie AS j WITH j.id = i.idCategorie WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Categorie AS j WITH j.id = i.idCategorie WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $user[0]['categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $user[0]['categorie_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
         
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j.id, j.immatriculation, j.nbPlace, v.id AS idVoiture FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Possede AS j WITH j.idUtilisateur = i.id JOIN BackOfficeBundle:Voiture AS v WITH v.id = j.idVoiture WHERE i.id ='.$id
-            );
+                'SELECT j.id, j.immatriculation, j.nbPlace, v.id AS idVoiture FROM BackOfficeBundle:Utilisateur i JOIN BackOfficeBundle:Possede AS j WITH j.idUtilisateur = i.id JOIN BackOfficeBundle:Voiture AS v WITH v.id = j.idVoiture WHERE i.id = :id'
+            )->setParameter('id', $id);
         
-        $user[0]['possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user[0]['possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         
         for($i=0; $i<count($user[0]['possede']); $i++)
         {
+            $id = $user[0]['possede'][$i]['idVoiture'];
             //possede voiture base
-            $em = $this->getDoctrine()->getEntityManager()
+            $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH i.idVoiture = j.id WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
-            );
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH i.idVoiture = j.id WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-            $user[0]['possede'][$i]['voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+            $user[0]['possede'][$i]['voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture marque
-            $em = $this->getDoctrine()->getEntityManager()
+            $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-            $user[0]['possede'][$i]['voiture']['marque'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+            $user[0]['possede'][$i]['voiture']['marque'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture type vehicule
-            $em = $this->getDoctrine()->getEntityManager()
+            $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.id ='.$user[0]['possede'][$i]['idVoiture']
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-            $user[0]['possede'][$i]['voiture']['type_vehicule'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+            $user[0]['possede'][$i]['voiture']['type_vehicule'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
             unset($user[0]['possede'][$i]['idVoiture']);
         }
         
@@ -454,21 +455,21 @@ class GetApiController extends Controller
     public function GetAllPossedeAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Possede i ORDER BY i.immatriculation ASC'
             );
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //USER PART :
 
         //Possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur ORDER BY i.immatriculation ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -477,12 +478,12 @@ class GetApiController extends Controller
         }
 
         //Possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille ORDER BY i.immatriculation ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -491,12 +492,12 @@ class GetApiController extends Controller
         }
 
         //Possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie ORDER BY i.immatriculation ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -507,12 +508,12 @@ class GetApiController extends Controller
         // VOITURE PART :
 
         //Possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture ORDER BY i.immatriculation ASC'
             );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($voiture as $value){
@@ -521,12 +522,12 @@ class GetApiController extends Controller
         }
 
         //Possede voiture Marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque ORDER BY i.immatriculation ASC'
             );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($voiture as $value){
@@ -535,12 +536,12 @@ class GetApiController extends Controller
         }
 
         //Possede voiture type Vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule ORDER BY i.immatriculation ASC'
             );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($voiture as $value){
@@ -559,63 +560,63 @@ class GetApiController extends Controller
     public function GetOnePossedeAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Possede i WHERE i.id ='.$id
-            );
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Possede i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //USER PART :
 
         //possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['utilisateur_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['utilisateur_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['utilisateur_possede']['ville_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['utilisateur_possede']['ville_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['utilisateur_possede']['Categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['utilisateur_possede']['Categorie_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //VOITURE PART :
 
         //possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['voiture_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['voiture_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:Marque AS k WITH k.id = j.idMarque WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['voiture_possede']['marque_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['voiture_possede']['marque_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture type vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Possede i JOIN BackOfficeBundle:Voiture AS j WITH j.id = i.idVoiture JOIN BackOfficeBundle:TypeVehicule AS k WITH k.id = j.idTypeVehicule WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $possede[0]['voiture_possede']['type_vehicule_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $possede[0]['voiture_possede']['type_vehicule_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
         
@@ -630,19 +631,19 @@ class GetApiController extends Controller
     public function GetAllTrajetAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Trajet i ORDER BY i.dateDepart ASC'
             );
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //Trajet Ville Depart
-         $em = $this->getDoctrine()->getEntityManager()
+         $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille ORDER BY i.dateDepart ASC'
             );
 
-        $ville = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $ville = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($ville as $value){
@@ -651,12 +652,12 @@ class GetApiController extends Controller
         }
 
         //Trajet Ville Arriver
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVilleVilleArrivee ORDER BY i.dateDepart ASC'
             );
 
-        $ville = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $ville = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($ville as $value){
@@ -664,12 +665,12 @@ class GetApiController extends Controller
             $i ++;
         }
         //Trajet type_trajet
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:TypeTrajet AS j WITH j.id = i.idTypeTrajet ORDER BY i.dateDepart ASC'
             );
 
-        $typeTrajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $typeTrajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($typeTrajet as $value){
@@ -681,12 +682,12 @@ class GetApiController extends Controller
         //POSSEDE PARTIE
 
         //possede base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede ORDER BY i.dateDepart ASC'
             );
 
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($possede as $value){
@@ -697,12 +698,12 @@ class GetApiController extends Controller
         //POSSEDE USER PART
 
         // possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur AS k WITH k.id = j.idUtilisateur ORDER BY i.dateDepart ASC'
             );
 
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($possede as $value){
@@ -710,12 +711,12 @@ class GetApiController extends Controller
             $i ++;
         }
         //possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur AS k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Ville AS l WITH l.id = k.idVille ORDER BY i.dateDepart ASC'
             );
 
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($possede as $value){
@@ -724,12 +725,12 @@ class GetApiController extends Controller
         }
 
         //possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur AS k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Categorie AS l WITH l.id = k.idCategorie ORDER BY i.dateDepart ASC'
             );
 
-        $possede = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $possede = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($possede as $value){
@@ -740,12 +741,12 @@ class GetApiController extends Controller
         //POSSEDE VOITURE PART
 
         //possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
         ->createQuery(
             'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture AS k WITH k.id = j.idVoiture ORDER BY i.dateDepart ASC'
         );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     
         $i = 0;
         foreach ($voiture as $value){
@@ -754,12 +755,12 @@ class GetApiController extends Controller
         }
 
         //possede voiture marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
         ->createQuery(
             'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture AS k WITH k.id = j.idVoiture JOIN BackOfficeBundle:Marque AS l WITH l.id = k.idMarque ORDER BY i.dateDepart ASC'
         );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     
         $i = 0;
         foreach ($voiture as $value){
@@ -768,12 +769,12 @@ class GetApiController extends Controller
         }
 
         //possede voiture type vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
         ->createQuery(
             'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture AS k WITH k.id = j.idVoiture JOIN BackOfficeBundle:TypeVehicule AS l WITH l.id = k.idTypeVehicule ORDER BY i.dateDepart ASC'
         );
 
-        $voiture = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $voiture = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     
         $i = 0;
         foreach ($voiture as $value){
@@ -793,101 +794,101 @@ class GetApiController extends Controller
     public function GetOneTrajetAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Trajet i WHERE i.id ='.$id
-            );
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Trajet i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //Trajet Ville Depart
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille  WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVille  WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['ville_depart_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['ville_depart_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //Trajet Ville Arriver
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVilleVilleArrivee  WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Ville AS j WITH j.id = i.idVilleVilleArrivee  WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['ville_arrivee_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['ville_arrivee_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //Trajet type_trajet
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:TypeTrajet AS j WITH j.id = i.idTypeTrajet  WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:TypeTrajet AS j WITH j.id = i.idTypeTrajet  WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['type_trajet_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['type_trajet_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
 
         //POSSEDE PARTIE
 
         //possede base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede  WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede  WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
         //POSSEDE USER PART
 
         //possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['utilisateur_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['utilisateur_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
 
         //possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Ville AS l WITH l.id = k.idVille WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Ville AS l WITH l.id = k.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['utilisateur_possede']['ville_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['utilisateur_possede']['ville_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Categorie AS l WITH l.id = k.idCategorie WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Utilisateur as k WITH k.id = j.idUtilisateur JOIN BackOfficeBundle:Categorie AS l WITH l.id = k.idCategorie WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['utilisateur_possede']['categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['utilisateur_possede']['categorie_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
         //POSSEDE VOITURE PART
 
         //possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture WHERE i.id = id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['voiture_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['voiture_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture JOIN BackOfficeBundle:Marque AS l WITH l.id = k.idMarque WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture JOIN BackOfficeBundle:Marque AS l WITH l.id = k.idMarque WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['voiture_possede']['marque_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['voiture_possede']['marque_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //possede voiture type vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture JOIN BackOfficeBundle:TypeVehicule AS l WITH l.id = k.idTypeVehicule WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Trajet i JOIN BackOfficeBundle:Possede AS j WITH j.id = i.idPossede JOIN BackOfficeBundle:Voiture as k WITH k.id = j.idVoiture JOIN BackOfficeBundle:TypeVehicule AS l WITH l.id = k.idTypeVehicule WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $trajet[0]['possede_trajet']['voiture_possede']['type_vehicule_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $trajet[0]['possede_trajet']['voiture_possede']['type_vehicule_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
         
         $response = new Response();
@@ -901,19 +902,19 @@ class GetApiController extends Controller
     public function GetAllCovoiturageAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT i FROM BackOfficeBundle:Covoiturage i ORDER BY i.created ASC'
             );
-        $covoiturage = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $covoiturage = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
 
         //Covoiturage type covoit
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:TypeCovoit AS j WITH j.id = i.idTypeCovoit ORDER BY i.created ASC'
             );
 
-        $covoit = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $covoit = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($covoit as $value){
@@ -922,12 +923,12 @@ class GetApiController extends Controller
         }
 
         //covoiturage CO2
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Co2 AS j WITH j.id = i.idCo2 ORDER BY i.created ASC'
             );
 
-        $co2 = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $co2 = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($co2 as $value){
@@ -939,12 +940,12 @@ class GetApiController extends Controller
         //USER PART :
 
         //Covoiturage user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur ORDER BY i.created ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -953,12 +954,12 @@ class GetApiController extends Controller
         }
 
         //covoiturage user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille ORDER BY i.created ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -966,12 +967,12 @@ class GetApiController extends Controller
             $i ++;
         }
         //covoiturage user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie ORDER BY i.created ASC'
             );
 
-        $user = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $user = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($user as $value){
@@ -983,12 +984,12 @@ class GetApiController extends Controller
         //TRAJET PART :
 
         //Covoiturage trajet base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -997,12 +998,12 @@ class GetApiController extends Controller
         }
 
         //Covoiturage Trajet Ville Depart
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1010,12 +1011,12 @@ class GetApiController extends Controller
             $i ++;
         }
         //Covoiturage Trajet Ville Arriver
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVilleVilleArrivee ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1024,12 +1025,12 @@ class GetApiController extends Controller
         }
 
         //Covoiturage Trajet type_trajet
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:TypeTrajet AS k WITH k.id = j.idTypeTrajet ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1041,12 +1042,12 @@ class GetApiController extends Controller
         //TRAJET POSSEDE PARTIE
 
         //trajet possede base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1058,12 +1059,12 @@ class GetApiController extends Controller
         //TRAJET POSSEDE USER PART
 
         //trajet possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1072,12 +1073,12 @@ class GetApiController extends Controller
         }
 
         //trajet possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Ville AS m WITH m.id = l.idVille ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1086,12 +1087,12 @@ class GetApiController extends Controller
         }
 
         //trajet possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Categorie AS m WITH m.id = l.idCategorie ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1102,12 +1103,12 @@ class GetApiController extends Controller
         //TRAJET POSSEDE VOITURE PART
 
         //trajet possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1116,12 +1117,12 @@ class GetApiController extends Controller
         }
 
         //trajet possede voiture marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:Marque AS m WITH m.id = l.idMarque ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1130,12 +1131,12 @@ class GetApiController extends Controller
         }
 
         //trajet possede voiture type vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
                 'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:TypeVehicule AS m WITH m.id = l.idTypeVehicule ORDER BY i.created ASC'
             );
 
-        $trajet = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $trajet = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         $i = 0;
         foreach ($trajet as $value){
@@ -1154,160 +1155,160 @@ class GetApiController extends Controller
     public function GetOneCovoiturageAction(Request $request, $id)
     {
 
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT i FROM BackOfficeBundle:Covoiturage i WHERE i.id ='.$id
-            );
-        $covoiturage = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+                'SELECT i FROM BackOfficeBundle:Covoiturage i WHERE i.id = :id'
+            )->setParameter('id', $id);
+        $covoiturage = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         
         //Covoiturage type covoit
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:TypeCovoit AS j WITH j.id = i.idTypeCovoit WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:TypeCovoit AS j WITH j.id = i.idTypeCovoit WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['type_covoit_covoiturage'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['type_covoit_covoiturage'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
         //covoiturage CO2
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Co2 AS j WITH j.id = i.idCo2 WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Co2 AS j WITH j.id = i.idCo2 WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['co2_covoiturage'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['co2_covoiturage'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
         //USER PART :
 
         //Covoiturage user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['utilisateur_covoiturage'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['utilisateur_covoiturage'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //covoiturage user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['utilisateur_covoiturage']['ville_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['utilisateur_covoiturage']['ville_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //covoiturage user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Utilisateur AS j WITH j.id = i.idUtilisateur JOIN BackOfficeBundle:Categorie AS k WITH k.id = j.idCategorie WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['utilisateur_covoiturage']['categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['utilisateur_covoiturage']['categorie_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
 
         //TRAJET PART :
 
         //Covoiturage trajet base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet WHERE i.id ='.$id
-            );
+                'SELECT j FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //Covoiturage Trajet Ville Depart
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['ville_depart_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['ville_depart_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //Covoiturage Trajet Ville Arriver
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVilleVilleArrivee WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Ville AS k WITH k.id = j.idVilleVilleArrivee WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['ville_arrivee_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['ville_arrivee_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
 
         //Covoiturage Trajet type_trajet
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:TypeTrajet AS k WITH k.id = j.idTypeTrajet WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:TypeTrajet AS k WITH k.id = j.idTypeTrajet WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['type_trajet_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['type_trajet_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
 
 
         //TRAJET POSSEDE PARTIE
 
         //trajet possede base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede WHERE i.id ='.$id
-            );
+                'SELECT k FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
         //TRAJET POSSEDE USER PART
 
         //trajet possede user base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
         
 
         //trajet possede user ville
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Ville AS m WITH m.id = l.idVille WHERE i.id ='.$id
-            );
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Ville AS m WITH m.id = l.idVille WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['ville_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['ville_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //trajet possede user categorie
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
         ->createQuery(
-            'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Categorie AS m WITH m.id = l.idCategorie WHERE i.id ='.$id
-        );
+            'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Utilisateur AS l WITH l.id = k.idUtilisateur JOIN BackOfficeBundle:Categorie AS m WITH m.id = l.idCategorie WHERE i.id = :id'
+        )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['categorie_utilisateur'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['utilisateur_possede']['categorie_utilisateur'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
 
         //TRAJET POSSEDE VOITURE PART
 
         //trajet possede voiture base
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture WHERE i.id ='.$id
-            );
+                'SELECT l FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
 
         //trajet possede voiture marque
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:Marque AS m WITH m.id = l.idMarque WHERE i.id ='.$id
-            );
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:Marque AS m WITH m.id = l.idMarque WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede']['marque_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede']['marque_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         //trajet possede voiture type vehicule
-        $em = $this->getDoctrine()->getEntityManager()
+        $query = $this->getDoctrine()->getEntityManager()
             ->createQuery(
-                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:TypeVehicule AS m WITH m.id = l.idTypeVehicule WHERE i.id ='.$id
-            );
+                'SELECT m FROM BackOfficeBundle:Covoiturage i JOIN BackOfficeBundle:Trajet AS j WITH j.id = i.idTrajet JOIN BackOfficeBundle:Possede AS k WITH k.id = j.idPossede JOIN BackOfficeBundle:Voiture AS l WITH l.id = k.idVoiture JOIN BackOfficeBundle:TypeVehicule AS m WITH m.id = l.idTypeVehicule WHERE i.id = :id'
+            )->setParameter('id', $id);
 
-        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede']['type_vehicule_voiture'] = $em->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
+        $covoiturage[0]['trajet_covoiturage']['possede_trajet']['voiture_possede']['type_vehicule_voiture'] = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)[0];
 
         $response = new Response();
         
