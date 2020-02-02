@@ -2,10 +2,10 @@
 
 # Projet PHP/Symfony - Angular 2k20 CIR3 MB/CH
 
-## URL Front
+## URL Front (a modifier dans le fichier de Host)
 ### http://foang.cir3-frm-smf-ang-mc
 
-## URL Back
+## URL Back (a modifier dans le fichier de Host)
 ### http://cir3-frm-smf-ang-mc
 
 ## API Rest
