@@ -20,7 +20,7 @@ export class CreeTrajetComponent implements OnInit {
   baseApiUrl:string;
   
 
-
+//ajout du form builder,de httpclient et des constantes global
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -30,6 +30,7 @@ export class CreeTrajetComponent implements OnInit {
       this.baseApiUrl = this._constant.baseApiUrl;
      }
 
+     //initialisation du formulaire dans userForm
   ngOnInit() {
     this.userForm = this.fb.group({
       date_depart : this.fb.control(''),
@@ -45,12 +46,13 @@ export class CreeTrajetComponent implements OnInit {
     })
   }
 
+  //faire les requette GET
   ngAfterViewInit() {
     this.doGET();
   }
 
   doGET(){
-    //ville
+    //recuperation des villes
     console.log('GET');
     let url = this.baseApiUrl+'ville';
     this.http.get<any[]>(url).subscribe((response) => {
@@ -60,7 +62,7 @@ export class CreeTrajetComponent implements OnInit {
       console.log('Erreur ! : ' + error);
     });
 
-    //possede
+    //recuperation des possede de l'utilisateur
     console.log('GET');
     url = this.baseApiUrl+'possede/utilisateur/'+this.id_user;
     this.http.get<any[]>(url).subscribe((response) => {
@@ -70,7 +72,7 @@ export class CreeTrajetComponent implements OnInit {
       console.log('Erreur ! : ' + error);
     });
 
-    //type trajet
+    //recuperation des type de trajet
     console.log('GET');
     url = this.baseApiUrl+'type_trajet';
     this.http.get<any[]>(url).subscribe((response) => {
@@ -82,11 +84,12 @@ export class CreeTrajetComponent implements OnInit {
 
   }
 
+  // envoie de formulaire
   register(){
     console.log(this.userForm.value);
 
     var formData: any = new FormData();
-
+    //ajout des valeur saisie dans formData
     formData.append("dateDepart",this.userForm.value['date_depart']);
     formData.append("heureDepart",this.userForm.value['heure_depart']);
     formData.append("nbPlace",this.userForm.value['nb_place']);
@@ -98,6 +101,7 @@ export class CreeTrajetComponent implements OnInit {
     formData.append("idPossede",this.userForm.value['id_possede']);
     formData.append("idTypeTrajet",this.userForm.value['id_type_trajet']);
 
+    //envoie des donnee en Backoffice sur l'API avec une methode POST
     this.http.post(this.baseApiUrl+'trajet/new', formData).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)

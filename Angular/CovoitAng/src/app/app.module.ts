@@ -16,6 +16,7 @@ import { DatePipe  } from '@angular/common';
 import { ConstantsService } from './common/services/constants.service';
 import { CovoiturageComponent } from './covoiturage/covoiturage.component';
 import { ModifProfilComponent } from './modif-profil/modif-profil.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ModifProfilComponent } from './modif-profil/modif-profil.component';
     TrajetVueComponent,
     AssociationUtilisateurComponent,
     CovoiturageComponent,
-    ModifProfilComponent
+    ModifProfilComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

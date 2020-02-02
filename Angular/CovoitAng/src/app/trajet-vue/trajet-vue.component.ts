@@ -22,6 +22,7 @@ export class TrajetVueComponent implements OnInit {
   id_user:string;	
   baseApiUrl:string;
 
+  //ajout du form builder pour l'association des trajet
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -33,12 +34,13 @@ export class TrajetVueComponent implements OnInit {
     this.baseApiUrl = this._constant.baseApiUrl;
   }
   
-
+  
   ngOnInit() {
+    //recuperation des parametre de route
     this.route.paramMap.subscribe(params => {
       this.id = +params.get("id_trajet")
     })
-
+    //initialisation du formulaire
     this.userForm = this.fb.group({
       created : this.fb.control(''),
       updated : this.fb.control(''),
@@ -55,6 +57,7 @@ export class TrajetVueComponent implements OnInit {
   
 
   doGET(){
+    //recuperation des informations du trajet selectionner
     console.log('GET');
     let url = this.baseApiUrl+'trajet/'+this.id;
     this.http.get<any[]>(url).subscribe((response) => {
@@ -67,10 +70,11 @@ export class TrajetVueComponent implements OnInit {
     console.log(this.valueRetour);
   }
 
+
   register(){
 
     var formData:any = new FormData();
-
+    //ajout des valeur dans formData pour une nouveau covoiturage
     formData.append("created", this.created);
     formData.append("updated", this.created);
     formData.append("idUtilisateur", this.id_user);
@@ -78,6 +82,7 @@ export class TrajetVueComponent implements OnInit {
     formData.append("idTypeCovoit", this.id_type_covoit);
     formData.append("idTrajet", this.id);
 
+    //envoie des donnee en Backoffice sur l'API avec une methode POST
     this.http.post(this.baseApiUrl+'covoiturage/new', formData).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
@@ -88,7 +93,6 @@ export class TrajetVueComponent implements OnInit {
   //valeur formulaire pour inscription
   now = new Date();
   created = this.datepipe.transform(this.now, "y-m-d hh:MM:ss");
-  //created = this.now.toISOString();
   id_co2 = 1;
   id_type_covoit = 2;
   id_trajet = this.id
