@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { ConstantsService } from '../common/services/constants.service';
 
 
 @Component({
@@ -14,7 +15,15 @@ import { Injectable } from '@angular/core';
 export class ProfilComponent implements OnInit {
 
   utilisateur: any;
-  constructor(private http: HttpClient) { 
+  baseApiUrl:string;
+  id_user:string;	
+
+  //recuperation des constante globale
+  constructor(
+    private http: HttpClient,
+    private _constant: ConstantsService) {
+    this.id_user = this._constant.defaultUserId;
+      this.baseApiUrl = this._constant.baseApiUrl;
       
   }
 
@@ -27,10 +36,8 @@ export class ProfilComponent implements OnInit {
   }
 
   doGET(){
-
-    let id=1;
-
-    let url = 'http://127.0.0.1:8000/api/utilisateur/' + id;
+    //recuperation des information de l'utilisateur connecter
+    let url = this.baseApiUrl+'utilisateur/' + this.id_user;
     this.http.get<any[]>(url).subscribe((response) => {
       this.utilisateur = response[0];
       console.log(this.utilisateur);

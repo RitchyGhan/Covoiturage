@@ -1,4 +1,5 @@
-<form (ngSubmit)="modif()" [formGroup]="userForm">
+<div class="container">
+<form id="contact" (ngSubmit)="modif()" [formGroup]="userForm">
  <div>
     <label>Nom</label><input formControlName="nom" >
     <label>Prénom</label><input formControlName="prenom" >
@@ -30,3 +31,4 @@
  
  <button type="submit" [disabled]="userForm.invalid">Modifier mes info personnelles</button>
 </form>
+</div>

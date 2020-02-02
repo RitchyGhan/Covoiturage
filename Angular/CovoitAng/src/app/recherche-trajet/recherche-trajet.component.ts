@@ -13,6 +13,7 @@ export class RechercheTrajetComponent {
 
   valueRetour: any;
   baseApiUrl:string;
+  //recuperation des constante global
   constructor(
     private http: HttpClient,
     private _constant: ConstantsService) {
@@ -24,8 +25,9 @@ export class RechercheTrajetComponent {
     this.doGET();
   }
 
-  //recuperation information du trajet
+  
   doGET(){
+    //recuperation information du trajet
     console.log('GET');
     let url = this.baseApiUrl+'trajet';
     this.http.get<any[]>(url).subscribe((response) => {

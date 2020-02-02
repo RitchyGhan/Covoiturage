@@ -15,6 +15,8 @@ export class CovoiturageComponent{
   valueRetour: any;
   baseApiUrl:string;
   id_user:string;	
+
+  //recuperation des constante globale
   constructor(
     private http: HttpClient,
     private _constant: ConstantsService) {
@@ -27,7 +29,7 @@ export class CovoiturageComponent{
     this.doGET();
   }
 
-  //recuperation information du trajet
+  //recuperation information des covoit associer a l'utilisateur connecter
   doGET(){
     console.log('GET');
     let url = this.baseApiUrl+'covoiturage/utilisateur/'+this.id_user;

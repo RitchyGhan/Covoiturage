@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { ConstantsService } from '../common/services/constants.service';
 
 
 @Component({
@@ -16,11 +17,16 @@ export class ModifProfilComponent implements OnInit {
   utilisateur: any;
   ville: any;
   categorie: any;
+  baseApiUrl:string;
+  id_user:string;	
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private _constant: ConstantsService) {
+    this.id_user = this._constant.defaultUserId;
+    this.baseApiUrl = this._constant.baseApiUrl;
+   }
 
   ngOnInit() {
-  
+    //initialisation du formulaire
     this.userForm = this.fb.group({
       nom : this.fb.control(''),
       prenom : this.fb.control(''),
@@ -36,13 +42,11 @@ export class ModifProfilComponent implements OnInit {
   
   
   doGET(){
-  
-    let id=1;
-
-    let url = 'http://127.0.0.1:8000/api/utilisateur/' + id;
+    //recuperation des information utilisateur
+    let url = this.baseApiUrl+'utilisateur/' + this.id_user;
     this.http.get<any[]>(url).subscribe((response) => {
       this.utilisateur = response[0];
-      
+      //insertion des valeur dans les champ comme valeur par default dans le formulaire
       this.userForm = this.fb.group({
       nom : this.fb.control(this.utilisateur.nom),
       prenom : this.fb.control(this.utilisateur.prenom),
@@ -60,10 +64,8 @@ export class ModifProfilComponent implements OnInit {
     
     });
     
-    
-    
-    //ville
-    url = 'http://127.0.0.1:8000/api/ville';
+    //recuperation des villes
+    url = this.baseApiUrl+'ville';
     this.http.get<any[]>(url).subscribe((response) => {
       this.ville = response;
     },
@@ -71,8 +73,8 @@ export class ModifProfilComponent implements OnInit {
       console.log('Erreur ! : ' + error);
     });
     
-    //categorie
-    url = 'http://127.0.0.1:8000/api/categorie';
+    //recuperation des categorie
+    url = this.baseApiUrl+'categorie';
     this.http.get<any[]>(url).subscribe((response) => {
       this.categorie = response;
     },
@@ -85,7 +87,7 @@ export class ModifProfilComponent implements OnInit {
   modif()
   {
     var formData: any = new FormData();
-    
+    //recuperation des valeurs saisie par l'utilisateur dans le formulaire 
     formData.append("id",1);
     formData.append("nom",this.userForm.value['nom']);
     formData.append("prenom",this.userForm.value['prenom']);
@@ -96,7 +98,8 @@ export class ModifProfilComponent implements OnInit {
     formData.append("idVille",this.userForm.value['id_ville']);
     formData.append("idCategorie",this.userForm.value['id_categorie']);
   
-    this.http.post('http://127.0.0.1:8000/api/utilisateur/modify', formData).subscribe(
+    //envoie des donnee en Backoffice sur l'API avec une methode POST
+    this.http.post(this.baseApiUrl+'utilisateur/modify', formData).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     );

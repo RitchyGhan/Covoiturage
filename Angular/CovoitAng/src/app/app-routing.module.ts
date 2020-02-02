@@ -8,8 +8,8 @@ import  {CreeTrajetComponent} from './cree-trajet/cree-trajet.component';
 import  {CovoiturageComponent} from './covoiturage/covoiturage.component';
 import  {ProfilComponent} from './profil/profil.component';
 import  {ModifProfilComponent} from './modif-profil/modif-profil.component';
-
 import  {HomeComponent} from './home/home.component';
+import  {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'covoiturage', component: CovoiturageComponent},
   { path: 'profil', component: ProfilComponent},
   { path: 'modif-profil', component: ModifProfilComponent},
+  { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
