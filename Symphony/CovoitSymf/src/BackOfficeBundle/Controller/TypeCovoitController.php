@@ -1,8 +1,11 @@
 <?php
 /**
-   * @Author: Huguen Clément
-   * @Author: Marius Bethelot
-   */
+  * CRUD de la table type_covoit
+  *
+  * @author: Huguen Clément
+  * @author: Marius Bethelot
+  * @version: 1.0
+  */
 
 namespace BackOfficeBundle\Controller;
 

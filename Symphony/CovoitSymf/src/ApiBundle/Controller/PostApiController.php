@@ -1,8 +1,11 @@
 <?php
 /**
-   * @Author: Huguen Clément
-   * @Author: Marius Bethelot
-   */
+  * Controller API de la methode POST
+  
+  * @author: Huguen Clément
+  * @author: Marius Bethelot
+  * @version: 1.0
+  */
 
 namespace ApiBundle\Controller;
 

@@ -1,8 +1,11 @@
 <?php
 /**
-   * @Author: Huguen Clément
-   * @Author: Marius Bethelot
-   */
+  * Page d'acceuille du BackOffice
+  *
+  * @author: Huguen Clément
+  * @author: Marius Bethelot
+  * @version: 1.0
+  */
 
 namespace BackOfficeBundle\Controller;
 

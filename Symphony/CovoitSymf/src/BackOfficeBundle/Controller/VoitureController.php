@@ -1,8 +1,11 @@
 <?php
 /**
-   * @Author: Huguen Clément
-   * @Author: Marius Bethelot
-   */
+  * Controller CRUD de la table Voiture
+  
+  * @author: Huguen Clément
+  * @author: Marius Bethelot
+  * @version: 1.0
+  */
 
 namespace BackOfficeBundle\Controller;
 
