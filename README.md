@@ -111,5 +111,5 @@
 
 
 ## Base de données
-Le script de la base de données se trouve ici [futurFichier.sql](https://github.com/RitchyGhan/Covoiturage/blob/master/futurfichier.sql)
+Le script de la base de données se trouve ici [cir3-prjsymj-BM-CH.sql](https://github.com/RitchyGhan/Covoiturage/blob/master/cir3-prjsymj-BM-CH.sql)
 Le nom de la Base, Utilisateur et Mot de passe sont à changer dans `Symfony/CovoitSymf/app/config/parameters.yml`
