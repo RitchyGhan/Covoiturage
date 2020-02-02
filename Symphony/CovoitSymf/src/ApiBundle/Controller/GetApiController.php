@@ -1,4 +1,8 @@
 <?php
+ /**
+  * @Author: Huguen Clément
+  * @Author: Marius Bethelot
+  */
 
 namespace ApiBundle\Controller;
 
